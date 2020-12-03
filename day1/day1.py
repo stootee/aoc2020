@@ -1,11 +1,6 @@
 def is2020(*args):
     return sum(args) == 2020
 
-def iterate_list(*args):
-    for lst in args:
-        for idx, x in enumerate(lst):
-
-
 
 with open('day1.txt', 'r') as fl:
     a = fl.read().splitlines()
