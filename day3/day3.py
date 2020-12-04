@@ -11,8 +11,8 @@ class Toboggan:
         self.down = move[1]
 
     def move(self):
-        self.column = self.column + self.across
-        self.row = self.row + self.down
+        self.column += self.across
+        self.row += self.down
 
     def i_hit_a_tree(self):
         self.trees_hit += 1
@@ -29,8 +29,6 @@ def have_i_hit_a_tree(toboggan):
 
     if (course[rw] * multiplier)[cl] == '#':
         hit_tree = True
-
-    toboggan.move()
 
     return hit_tree
 
@@ -54,6 +52,7 @@ for tob in toboggans:
     for moves in range(len(course)):
         if have_i_hit_a_tree(tob):
             tob.i_hit_a_tree()
+        tob.move()
 
     print(f'{tob} hit {tob.trees_hit} trees')
     tree_multiplier *= tob.trees_hit
