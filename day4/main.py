@@ -16,12 +16,10 @@ def pair(pair_string):
 
 
 def is_valid1(id_dict):
-    if {k for k in id_keys.keys() if id_keys[k]['required']}.issubset(set(id_dict.keys())):
-        return True
+    return {k for k in id_keys.keys() if id_keys[k]['required']}.issubset(set(id_dict.keys()))
 
 
 def is_valid2(id_dict):
-
     valid_count = 0
     for k in [k for k in id_keys.keys() if id_keys[k]['required']]:
         if k in id_dict.keys():
@@ -70,7 +68,7 @@ if __name__ == '__main__':
     for ky in id_keys:
         for item in invalid_id_list:
             if ky in item.keys() and not ky == 'cid' and not item[ky][1]:
-                print(item[ky], id_keys[ky]['rule'])
+                print(item[ky][0], id_keys[ky]['rule'])
 
     print(len(valid_id_list))
 
