@@ -17,11 +17,11 @@ for grouple in groups:
 
     group_counter += len(group_answer_set)
 
-print(group_counter)
+print('part 1', group_counter)
 
 # part 2
 same_group_answer = 0
 for grouple in groups:
     same_group_answer += len(set.intersection(*grouple))
 
-print(same_group_answer)
+print('part 2', same_group_answer)
