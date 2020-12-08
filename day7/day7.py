@@ -1,5 +1,4 @@
 import networkx as nx
-from matplotlib import pyplot as plt
 
 
 class Bag:
@@ -30,12 +29,14 @@ for rule in inp:
     bags.append(bag)
 
 node_name = 'shiny gold'
+
 colours = {node for node in nx.bfs_edges(B, node_name, reverse=True) if node != node_name}
+
 print(len(colours))
 
-no_of_bags = {node for node in nx.bfs_edges(B, node_name)}
+no_of_bags = [node for node in nx.edge_bfs(B, node_name)]
 
-bag_map = {}
+bag_map = dict()
 for a, b, d in B.edges.data():
     if (a, b,) in no_of_bags:
         if a in bag_map.keys():
@@ -43,18 +44,17 @@ for a, b, d in B.edges.data():
         else:
             bag_map[a] = [b] * d['weight']
 
-print(bag_map)
+bag_list = []
+
 
 def count_them_bags(bag_name):
-    counter = 0
-    for bag in bag_map[bag_name]:
-        counter += 1
+    bag_list.append(bag_name)
+    if bag_name not in bag_map.keys():
+        return
+    else:
+        [count_them_bags(bag) for bag in bag_map[bag_name]]
+        return
 
 
-
-
-
-
-
-
-
+count_them_bags(node_name)
+print(len(bag_list) - 1)
