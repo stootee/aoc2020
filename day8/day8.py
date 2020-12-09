@@ -1,8 +1,9 @@
 def swap_instruction(k):
-    '''
+    """
     swaps the command value of k if it is one of 'nop' or 'jmp'. Otherwise leaves the value as is.\n
     Returns whether the value was swapped (bool) and the new command value of k (str)
-    '''
+    """
+
     if k == 'nop':
         return True, 'jmp'
     elif k == 'jmp':
@@ -28,27 +29,25 @@ def boot_loader(inp_list):
 
         while not finished:
             try:
-                instr, val = inp[current_index].split(' ')
+                instr, vl = inp[current_index].split(' ')
             except IndexError:
                 print('Index error')
                 break
-            val = int(val)
+            vl = int(vl)
 
             if has_run(current_index):
                 break
-            if has_finished(current_index):
-                finished = True
 
-            if instr == 'nop':
-                run_log[current_index] += 1
+            finished = has_finished(current_index)
+
+            run_log[current_index] += 1
+            if instr == 'jmp':
+                current_index += vl
+            else:
                 current_index += 1
-            elif instr == 'acc':
-                run_log[current_index] += 1
-                accumulator += val
-                current_index += 1
-            elif instr == 'jmp':
-                run_log[current_index] += 1
-                current_index += val
+
+            if instr == 'acc':
+                accumulator += vl
 
         if finished:
             break
