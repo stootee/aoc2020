@@ -1,4 +1,4 @@
-from inputs import rules, nearby_tickets, your_ticket
+from day16.inputs import rules, nearby_tickets, your_ticket
 from numpy import array, prod
 
 acceptable_values = set()
@@ -32,6 +32,8 @@ for x in nearby_ticket_list:
 
 print('Part1:', sum(invalid_values))
 
+
+# Part 2
 arr = array(valid_tickets).transpose()
 
 rule_map = {}
@@ -46,7 +48,7 @@ while len(rule_map) < len(rules):
                     possibles.append(k)
 
             if len(possibles) == 1:
-                print(f'col {n} can only be {possibles[0]}')
+                # print(f'col {n} can only be {possibles[0]}')
                 rule_map[possibles[0]] = n
 
-print(prod(list([your_ticket[i] for i in [v for k, v in rule_map.items() if k[:9] == 'departure']])))
+print('Part2:', prod(list([your_ticket[i] for i in [v for k, v in rule_map.items() if k[:9] == 'departure']])))
