@@ -1,28 +1,12 @@
 from day22.decks import *
 
-# Player1 = [
-#     9,
-#     2,
-#     6,
-#     3,
-#     1,
-# ]
-#
-# Player2 = [
-#     5,
-#     8,
-#     4,
-#     7,
-#     10,
-# ]
-
 
 class Game:
-    part2 = False
 
-    def __init__(self, pl1, pl2):
-        self.player1 = Player(pl1)
-        self.player2 = Player(pl2)
+    def __init__(self, pl1, pl2, part2=False):
+        self.player1 = Player(pl1[:])
+        self.player2 = Player(pl2[:])
+        self.part2 = part2
 
     def play(self):
 
@@ -44,8 +28,7 @@ class Game:
 
             if self.part2:
                 if p1 <= len(self.player1.cards) and p2 <= len(self.player2.cards):
-                    new_game = Game(self.player1.cards[:p1_card], self.player2.cards[:p2_card])
-                    new_game.part2 = True
+                    new_game = Game(self.player1.cards[:p1_card], self.player2.cards[:p2_card], True)
                     p1, p2 = new_game.play()
 
             if p1 > p2:
@@ -72,10 +55,8 @@ class Player:
         return sum([((n+1) * c) for n, c in enumerate(self.cards[::-1])])
 
 
-game = Game(Player1.copy(), Player2.copy())
-print(game.play())
+# Part 1
+print(Game(Player1, Player2).play())
 
 # Part 2
-game2 = Game(Player1.copy(), Player2.copy())
-game2.part2 = True
-print(game2.play())
+print(Game(Player1, Player2, True).play())
